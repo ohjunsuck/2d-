@@ -2,8 +2,8 @@ import random
 
 from pico2d import *
 
-
 class FreeBoy:
+
     PIXEL_PER_METER = (10.0 / 0.3)           # 10 pixel 30 cm
     RUN_SPEED_KMPH = 80.0                    # Km / Hour
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
@@ -16,7 +16,7 @@ class FreeBoy:
     FRAMES_PER_ACTION = 8
 
     image = None
-
+    walk_sound =None
     LEFT_RUN, RIGHT_RUN, LEFT_STAND, RIGHT_STAND = 0, 1, 2, 3
 
     def __init__(self):
@@ -32,12 +32,19 @@ class FreeBoy:
         if FreeBoy.image == None:
             FreeBoy.image = load_image('animation_sheet.png')
 
+        if FreeBoy.walk_sound == None :
+            FreeBoy.walk_sound = load_wav('walk2-1.wav')
+            FreeBoy.walk_sound.set_volume(35)
+
 
     def set_background(self, bg):
         self.bg = bg
 
+    def walk(self):
+        self.walk_sound.play()
 
     def update(self, frame_time):
+
         self.life_time += frame_time
         distance = FreeBoy.RUN_SPEED_PPS * frame_time
         self.total_frames += FreeBoy.FRAMES_PER_ACTION * FreeBoy.ACTION_PER_TIME * frame_time
@@ -88,6 +95,7 @@ class FreeBoy:
 
     def handle_event(self, event):
         if event.type == SDL_KEYDOWN:
+            #self.walk_sound.play()
             if event.key == SDLK_LEFT: self.xdir += -1
             elif event.key == SDLK_RIGHT: self.xdir += 1
             elif event.key == SDLK_UP: self.ydir += 1

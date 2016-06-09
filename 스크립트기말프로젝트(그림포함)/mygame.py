@@ -17,6 +17,7 @@ class Data:
         self.name=None
         self.ename=None
         self.test='ERALdzlI%2FkiXZqCCA3LW1n7E3Mv7uY5uR52OlH5KGT7gJNXQA2wQOJoKYTGcL5w9%2Fce7EpSuU%2F%2FDb7kiGehAZg%3D%3D&numOfRows=999'
+
     def parse(self):
         self.url = " http://apis.data.go.kr/1262000/CountryBasicService/getCountryBasicList?ServiceKey=%s" % (self.test)
         data = urllib.request.urlopen(self.url).read()

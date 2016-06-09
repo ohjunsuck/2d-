@@ -63,7 +63,8 @@ def handle_events(frame_time):
 def update(frame_time):
     boy.update(frame_time)
     background.update(frame_time)
-
+    if boy.state in (boy.LEFT_RUN, boy.RIGHT_RUN):
+        boy.walk()
 
 
 def draw(frame_time):
